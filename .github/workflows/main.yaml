@@ -11,13 +11,15 @@ jobs:
     steps:
       - name: Build aaa
         run: |
-          mkdir -p aaa/src/workspace/usr/lib
+          mkdir -p aaa/src/workspace/usr/bin aaa/src/workspace/usr/lib
+          echo "aaa" > aaa/src/workspace/usr/bin/exec-aaa
           echo "aaa" > aaa/src/workspace/usr/lib/libaaa.so
       - name: Upload aaa
         uses: actions/upload-artifact@v4
         with:
           name: aaa
           path: |
+            aaa/src/workspace/usr/bin/exec-aaa
             aaa/src/workspace/usr/lib/libaaa.so
     
   build_bbb:
@@ -28,9 +30,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: aaa
-          path: aaa/src/workspace/usr/lib
-      - name: Build bbb
+          path: aaa/src/workspace/usr
+      - name: Check 
         run: |
           pwd
-          ls
-          ls -l aaa/src/workspace/usr/lib
+          ls -R
