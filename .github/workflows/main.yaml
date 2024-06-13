@@ -21,9 +21,10 @@ jobs:
             aaa/src/workspace/usr/lib/libaaa.so
     
   build_bbb:
+    needs: build_aaa
     runs-on: ubuntu-22.04
     steps:
-      - name: Download bbb
+      - name: Download aaa
         uses: actions/download-artifact@v4
         with:
           name: aaa
