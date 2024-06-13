@@ -1,0 +1,33 @@
+name: main
+on:
+  pull_request:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build_aaa:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Build aaa
+        run: |
+          mkdir -p aaa/src/workspace/usr/lib
+          echo "aaa" > aaa/src/workspace/usr/lib/libaaa.so
+      - name: Upload aaa
+        uses: actions/upload-artifact@v4
+        with:
+          name: aaa
+          path: |
+            aaa/src/workspace/usr/lib/libaaa.so
+    
+  build_bbb:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Download bbb
+        uses: actions/download-artifact@v4
+        with:
+          name: aaa
+      - name: Build bbb
+        run: |
+          pwd
+          ls -l aaa/src/workspace/usr/lib
