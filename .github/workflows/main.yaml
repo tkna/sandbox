@@ -31,4 +31,5 @@ jobs:
       - name: Build bbb
         run: |
           pwd
+          ls
           ls -l aaa/src/workspace/usr/lib
