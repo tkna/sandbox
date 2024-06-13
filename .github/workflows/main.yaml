@@ -28,6 +28,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: aaa
+          path: aaa/src/workspace/usr/lib
       - name: Build bbb
         run: |
           pwd
